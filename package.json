@@ -1,0 +1,76 @@
+{
+  "name": "squeezer-aws",
+  "version": "0.0.1",
+  "description": "AWS Squeezer Plugin . This plugin enables AWS Lambda support within the Squeezer Framework.",
+  "homepage": "https://squeezer.io/",
+  "bin": {},
+  "keywords": [
+    "squeezer.io",
+    "squeezer.io framework",
+    "squeezer framework",
+    "squeezer",
+    "squeezer cli",
+    "squeezer generator",
+    "serverless",
+    "serverless framework",
+    "microservices",
+    "micro",
+    "service",
+    "microservices",
+    "aws lambda",
+    "lambda",
+    "API",
+    "web",
+    "web app",
+    "swagger",
+    "swagger api docs",
+    "pug",
+    "reactjs",
+    "jade",
+    "aws",
+    "amazon web services lambda",
+    "api gateway",
+    "cloudfront",
+    "azure functions",
+    "google cloud functions",
+    "ibm openwhisk",
+    "iot",
+    "internet of things"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SqueezerIO/squeezer-aws"
+  },
+  "scripts": {
+    "eslint": "eslint . --cache",
+    "jsinspect": "jsinspect -t 30 -i ./"
+  },
+  "contributors": [
+    {
+      "name": "Nick Chisiu",
+      "email": "nick@squeezer.io",
+      "web": "https://Squeezer.IO/"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.9.0",
+    "bluebird": "^3.4.6",
+    "colors": "^1.1.2",
+    "fs-extra": "^4.0.1",
+    "home-config": "^0.1.0",
+    "lodash": "^4.15.0",
+    "moment": "^2.17.1",
+    "s3-upload-stream": "^1.0.7",
+    "walk-sync": "^0.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.10.0",
+    "jsinspect": "^0.8.0"
+  }
+}

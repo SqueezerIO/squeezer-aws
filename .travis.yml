@@ -1,0 +1,27 @@
+language: node_js
+
+node_js:
+  - "6"
+
+services:
+  - docker
+
+before_install:
+  - pip install --user awscli
+  - export PATH=$PATH:$HOME/.local/bin
+
+install:
+  - travis_retry npm install
+
+script:
+  - set -e
+  - npm run eslint
+  - npm run jsinspect
+
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/3c87287517b9672eb7d9
+    on_success: change
+    on_failure: always
+    on_start: never
