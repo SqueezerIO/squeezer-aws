@@ -1,6 +1,9 @@
 # squeezer-aws
 AWS Squeezer Plugin  . This plugin enables AWS Lambda support within the Squeezer Framework.
 
+[![Build Status](https://travis-ci.org/SqueezerIO/squeezer-aws.svg?branch=master)](https://travis-ci.org/SqueezerIO/squeezer-aws)
+[![npm version](https://badge.fury.io/js/squeezer-aws.svg)](https://badge.fury.io/js/squeezer-aws)
+
 ### Installation
 
 `cd PROJECT_DIR`
