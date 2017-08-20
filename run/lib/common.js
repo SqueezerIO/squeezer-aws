@@ -81,6 +81,7 @@ class AWSRunLib {
           return resolve();
         });
       } else {
+        _.assign(process.env, microservice.envCompiled);
         resolve();
       }
     });
