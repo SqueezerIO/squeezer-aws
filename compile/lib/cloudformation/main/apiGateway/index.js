@@ -78,7 +78,7 @@ class awsCompileApiGateway {
         Type       : 'AWS::CloudFormation::Stack',
         Properties : {
           TemplateURL      : `https://s3.amazonaws.com/${this.sqz.vars.aws.cfOutputs.SqueezerDeploymentBucket}` +
-          `/${this.sqz.vars.stage}/cloudformation/ApiGatewayStack-template.json`,
+          '/cloudformation/ApiGatewayStack-template.json',
           TimeoutInMinutes : 10,
           Parameters       : {
             ApiGatewayRestApiName : {
@@ -101,7 +101,7 @@ class awsCompileApiGateway {
         Type       : 'AWS::CloudFormation::Stack',
         Properties : {
           TemplateURL      : `https://s3.amazonaws.com/${this.sqz.vars.aws.cfOutputs.SqueezerDeploymentBucket}` +
-          `/${this.sqz.vars.stage}/cloudformation/ApiGatewayDeploymentStack-template.json`,
+          '/cloudformation/ApiGatewayDeploymentStack-template.json',
           TimeoutInMinutes : 10,
           Parameters       : {
             ApiGatewayRestApiId : {

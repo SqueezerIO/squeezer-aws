@@ -91,7 +91,7 @@ class DeployStack {
       this.sqz.cli.log.info('Updating CloudFormation stack...');
 
       const templateUrl = `https://s3.amazonaws.com/${this.sqz.vars.aws.cfOutputs.SqueezerDeploymentBucket}` +
-        `/${this.sqz.vars.stage}/cloudformation/mainStack-template.json`;
+        '/cloudformation/mainStack-template.json';
 
       const params = {
         StackName    : this.mainStackName,
@@ -178,6 +178,7 @@ class DeployStack {
         stack.Outputs.forEach((output) => {
           this.sqz.vars.aws.cfOutputs[output.OutputKey] = output.OutputValue;
           if (output.OutputKey === 'ApiGatewayRestApiBaseUrl') {
+            this.sqz.vars.appBaseUrl = output.OutputValue;
             this.sqz.cli.log.info(`App Base URL : ${colors.blue.bold(output.OutputValue)}`);
           }
         });

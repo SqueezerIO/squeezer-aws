@@ -5,7 +5,6 @@
  */
 
 const Promise   = require('bluebird');
-const _         = require('lodash');
 const AWS       = require('aws-sdk');
 const moment    = require('moment');
 const colors    = require('colors');
@@ -19,13 +18,12 @@ class AWSInvoke {
   constructor(sqz) {
     this.sqz                = sqz;
     this.options            = this.sqz.cli.params.get().options;
-    this.functionIdentifier = _.upperFirst(_.camelCase(this.options.function));
-    this.functionName       = `${this.sqz.vars.project.identifier}${this.functionIdentifier}Function-${this.sqz.vars.stage}`;
+    this.functionName       = this.sqz.cloud.utils.formatFunctionName(this.options.function);
   }
 
   run(functionName, eventInput) {
     this.sqz.cli.log.info(
-      `Invoking function ${colors.blue.bold(functionName)} on the AWS Lambda Cloud environment`
+      `Invoking function ${colors.blue.bold(this.functionName)} on the AWS Lambda Cloud environment`
     );
 
     this.invoke(eventInput).then((res) => {

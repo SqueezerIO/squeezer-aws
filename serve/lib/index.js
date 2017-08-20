@@ -22,7 +22,7 @@ class Express {
    * @param res - Express HTTP response
    * @param data - event data
    */
-  call(req, res, data) {
+  run(req, res, data) {
     const apiGatewayEvent     = new ApiGatewayEvent(this.sqz, req, data);
     const runCommon           = new RunCommon(this.sqz);
     const projectType         = this.sqz.vars.project.type;

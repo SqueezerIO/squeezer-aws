@@ -11,7 +11,7 @@ class AwsPluginIndex {
         description : '',
         lifecycle   : [
           'project:validate',
-          'aws:credentials',
+          'aws:init',
           'microservices:load',
           'aws:run'
         ],
@@ -54,7 +54,7 @@ class AwsPluginIndex {
         description : '',
         lifecycle   : [
           'project:validate',
-          'aws:credentials',
+          'aws:init',
           'aws:invoke'
         ],
         options     : {
@@ -85,7 +85,7 @@ class AwsPluginIndex {
         description : '',
         lifecycle   : [
           'project:validate',
-          'aws:credentials',
+          'aws:init',
           'aws:logs'
         ],
         options     : {
@@ -128,7 +128,7 @@ class AwsPluginIndex {
           'project:validate',
           'microservices:load',
           'project:info',
-          'aws:credentials',
+          'aws:init',
           'deploy:checksums:get',
           'deploy:compile',
           'aws:compile',
@@ -176,9 +176,10 @@ class AwsPluginIndex {
         description : '',
         lifecycle   : [
           'project:validate',
-          'aws:credentials',
+          'aws:init',
           'microservices:load',
           'project:info',
+          'serve:run',
           'aws:serve'
         ],
         options     : {

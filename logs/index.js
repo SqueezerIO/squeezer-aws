@@ -20,8 +20,7 @@ class AWSLogs {
   constructor(sqz) {
     this.sqz                = sqz;
     this.options            = this.sqz.cli.params.get().options;
-    this.functionIdentifier = _.upperFirst(_.camelCase(this.options.function));
-    this.functionName       = `${this.sqz.vars.project.identifier}${this.functionIdentifier}Function-${this.sqz.vars.stage}`;
+    this.functionName       = this.sqz.cloud.utils.formatFunctionName(this.options.function);
     this.logGroupName       = `/aws/lambda/${this.functionName}`;
     this.interval           = this.options.interval || 1000;
   }
