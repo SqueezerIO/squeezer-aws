@@ -33,6 +33,15 @@ class AWSStackBase {
       }
     };
 
+    this.stub.Outputs.SqueezerDeploymentBucketDomain = {
+      Value : {
+        'Fn::GetAtt' : [
+          'SqueezerDeploymentBucket',
+          'DomainName'
+        ]
+      }
+    };
+
     return this.stub;
   }
 }

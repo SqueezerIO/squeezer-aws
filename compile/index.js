@@ -120,10 +120,23 @@ class CompileAWS {
             Type       : 'AWS::CloudFormation::Stack',
             Properties : {
               TemplateURL      : `https://s3.amazonaws.com/${this.sqz.vars.aws.cfOutputs.SqueezerDeploymentBucket}` +
-              `/${this.sqz.vars.stage}/cloudformation/${key}-template.json`,
+              `/cloudformation/${key}-template.json`,
               TimeoutInMinutes : 10
             }
           };
+        }
+        if (this.sqz.vars.project.type === 'web' && key === 'cloudFrontStack') {
+          _.merge(this.sqz.vars.aws.cloudFormation.mainStack.Resources[key],
+            {
+              Properties : {
+                Parameters : {
+                  SqueezerDeploymentBucketDomain : {
+                    'Fn::GetAtt' : ['SqueezerDeploymentBucket', 'DomainName']
+                  }
+                }
+              }
+            }
+          );
         }
       }
     });
@@ -161,10 +174,9 @@ class CompileAWS {
       JSON.stringify(data, null, 2)
     );
 
-    this.sqz.vars.aws.s3Uploads.push({
-      path  : path,
-      name  : filename,
-      s3Key : `${this.sqz.vars.stage}/cloudformation/${filename}`
+    this.sqz.vars.aws.uploads.push({
+      localPath  : `${path}/${filename}`,
+      remotePath : `cloudformation/${filename}`
     });
   }
 

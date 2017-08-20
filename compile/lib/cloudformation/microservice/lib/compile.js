@@ -35,7 +35,7 @@ class AWSTemplateCompile {
     this.sqz.vars.microservices[microservice.name].aws = {
       stackName : `${microservice.identifier}Stack`,
       s3        : {
-        key : `${this.sqz.vars.stage}/microservices/${microservice.identifier}/${checksum}`
+        key : `microservices/${microservice.identifier}/${checksum}`
       }
     };
 
@@ -54,8 +54,7 @@ class AWSTemplateCompile {
         Type       : 'AWS::CloudFormation::Stack',
         Properties : {
           TemplateURL      : `https://s3.amazonaws.com/${this.sqz.vars.aws.cfOutputs.SqueezerDeploymentBucket}/` +
-          `${this.sqz.vars.stage}/cloudformation/` +
-          `${this.microservice.identifier}Stack-template.json`,
+          `cloudformation/${this.microservice.identifier}Stack-template.json`,
           TimeoutInMinutes : 10,
           Parameters       : {
             ApiGatewayRestApiId    : {
@@ -122,18 +121,15 @@ class AWSTemplateCompile {
    */
   addS3Upload() {
     if (this.microservice.deploy) {
-      this.sqz.vars.aws.s3Uploads.push({
-        path  : `${this.sqz.vars.project.buildPath}/deploy/microservices`,
-        name  : `${this.microservice.identifier}.zip`,
-        s3Key : `${this.microservice.aws.s3.key}/${this.microservice.identifier}.zip`
+      this.sqz.vars.aws.uploads.push({
+        localPath  : `${this.sqz.vars.project.buildPath}/deploy/microservices/${this.microservice.identifier}.zip`,
+        remotePath : `${this.microservice.aws.s3.key}/${this.microservice.identifier}.zip`
       });
     }
 
-    this.sqz.vars.aws.s3Uploads.push({
-      path  : `${this.sqz.vars.project.buildPath}/deploy/cloudformation`,
-      name  : `${this.microservice.identifier}Stack-template.json`,
-      s3Key : `${this.sqz.vars.stage}/cloudformation/` +
-      `${this.microservice.identifier}Stack-template.json`
+    this.sqz.vars.aws.uploads.push({
+      localPath  : `${this.sqz.vars.project.buildPath}/deploy/cloudformation/${this.microservice.identifier}Stack-template.json`,
+      remotePath : `cloudformation/${this.microservice.identifier}Stack-template.json`
     });
   }
 }

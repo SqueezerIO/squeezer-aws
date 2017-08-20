@@ -1,7 +1,7 @@
 'use strict';
 
-const Promise = require('bluebird');
-const AwsCallback     = require('./lib');
+const Promise       = require('bluebird');
+const AwsServeEvent = require('./lib');
 
 /**
  * Class that serves a Squeezer project
@@ -15,10 +15,14 @@ class AwsServe {
    * Serve the current project
    */
   run() {
-    return new Promise(() => {
-      const awsCallback = new AwsCallback(this.sqz);
+    return new Promise((resolve) => {
+      const awsServeEvent = new AwsServeEvent(this.sqz);
 
-      this.sqz.serve.run(awsCallback);
+      process.on('serveEvent', (event) => {
+        awsServeEvent.run(event.req, event.res, event.data);
+      });
+
+      resolve();
     });
   }
 }

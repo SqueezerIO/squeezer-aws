@@ -25,7 +25,9 @@ class DeployAWS {
       const upload = new Upload(this.sqz);
 
       self.sqz.cli.log.info('Uploading assets to the S3 bucket ');
+      this.sqz.cli.loader.start();
       upload.run().then(() => {
+        this.sqz.cli.loader.stop();
         self.sqz.cli.log.info('Removing S3 old microservices packages !');
         Promise.each(Object.keys(microservices), (key) => {
           return upload.cleanBucket(microservices[key]);
