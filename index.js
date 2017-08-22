@@ -11,9 +11,9 @@ class AwsPluginIndex {
         description : '',
         lifecycle   : [
           'project:validate',
-          'aws:init',
+          'cloud:init',
           'microservices:load',
-          'aws:run'
+          'cloud:run'
         ],
         options     : {
           function : {
@@ -54,8 +54,8 @@ class AwsPluginIndex {
         description : '',
         lifecycle   : [
           'project:validate',
-          'aws:init',
-          'aws:invoke'
+          'cloud:init',
+          'cloud:invoke'
         ],
         options     : {
           function : {
@@ -85,8 +85,8 @@ class AwsPluginIndex {
         description : '',
         lifecycle   : [
           'project:validate',
-          'aws:init',
-          'aws:logs'
+          'cloud:init',
+          'cloud:logs'
         ],
         options     : {
           function : {
@@ -128,12 +128,12 @@ class AwsPluginIndex {
           'project:validate',
           'microservices:load',
           'project:info',
-          'aws:init',
+          'cloud:init',
           'deploy:checksums:get',
           'deploy:compile',
-          'aws:compile',
-          'aws:deploy',
-          'aws:assets',
+          'cloud:compile',
+          'cloud:deploy',
+          'cloud:assets',
           'deploy:checksums:save'
         ],
         options     : {
@@ -176,11 +176,11 @@ class AwsPluginIndex {
         description : '',
         lifecycle   : [
           'project:validate',
-          'aws:init',
+          'cloud:init',
           'microservices:load',
           'project:info',
           'serve:run',
-          'aws:serve'
+          'cloud:serve'
         ],
         options     : {
           stage : {
@@ -193,6 +193,50 @@ class AwsPluginIndex {
         },
         examples    : [
           ''
+        ]
+      },
+      {
+        arg         : ['test'],
+        summary     : 'Run available tests on your current project',
+        description : '',
+        lifecycle   : [
+          'project:validate',
+          'cloud:init',
+          'microservices:load',
+          'project:info',
+          'serve:run',
+          'cloud:serve',
+          'cloud:test'
+        ],
+        options     : {
+          microservice : {
+            title        : 'microservice name',
+            flag         : 'm',
+            description  : 'run tests for only a specific microservice',
+            value        : true,
+            required     : false,
+            defaultValue : null
+          },
+          unit : {
+            title        : 'run available unit tests',
+            flag         : 'u',
+            description  : '',
+            value        : false,
+            required     : false,
+            defaultValue : null
+          },
+          integration : {
+            title        : 'run available integration tests',
+            flag         : 'i',
+            description  : '',
+            value        : false,
+            required     : false,
+            defaultValue : null
+          }
+        },
+        examples    : [
+          '',
+          '--microservice my-first-microservice'
         ]
       }
     ];
