@@ -73,6 +73,31 @@ class AWSTemplateCompile {
         );
       }
     }
+    this.shareMainOutputs();
+  }
+
+  /**
+   * Share all main outputs trough the microservices
+   */
+  shareMainOutputs() {
+    const mainOutputValues = {};
+    _.forEach(this.sqz.vars.aws.cloudFormation.mainStack.Outputs, (obj, key) => {
+      mainOutputValues[key] = obj.Value;
+    });
+
+    _.forEach(this.sqz.vars.microservices, (microservice) => {
+      _.merge(
+        this.sqz.vars.aws.cloudFormation.mainStack
+          .Resources[microservice.aws.stackName].Properties.Parameters,
+        mainOutputValues
+      );
+
+      _.forEach(_.keys(mainOutputValues), (outputVal) => {
+        this.template.Parameters[outputVal] = {
+          Type : 'String'
+        };
+      });
+    });
   }
 
   /**
