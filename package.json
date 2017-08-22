@@ -1,6 +1,6 @@
 {
   "name": "squeezer-aws",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "AWS Squeezer Plugin . This plugin enables AWS Lambda support within the Squeezer Framework.",
   "homepage": "https://squeezer.io/",
   "bin": {},

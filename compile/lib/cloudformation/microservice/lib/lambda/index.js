@@ -18,13 +18,18 @@ class AWSLambda {
     const variables = this.variables();
 
     if (this.sqz.vars.project.type === 'web') {
-      const cloudFrontDomain = this.sqz.vars.aws.cfOutputs.CloudFrontDomain;
-
-      variables.MAIN_ASSETS_URL    = `https://${cloudFrontDomain}/assets/main`;
-      variables.ASSETS_URL         = `https://${cloudFrontDomain}/assets/microservices/` +
+      variables.MAIN_ASSETS_URL_PATH    = 'assets/main';
+      variables.ASSETS_URL_PATH         = 'assets/microservices/' +
         `${this.microservice.identifier}`;
       variables.ASSETS_CHECKSUMS = new Buffer(JSON.stringify(this.sqz.vars.currentChecksums)).toString('base64');
     }
+
+    /* share available Paramets as Environment variables */
+    _.forEach(_.keys(this.template.Parameters), (param) => {
+      variables[param] = {
+        Ref : param
+      };
+    });
 
     this.template.Resources[lambdaFunction.logicalId] = {
       Type       : 'AWS::Lambda::Function',
