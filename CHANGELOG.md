@@ -1,3 +1,6 @@
+## v0.0.5 - 2017-08-22
+- use "cloud" identifier as hook prefix
+
 ## v0.0.4 - 2017-08-22
 - fixed environments Outputs
 

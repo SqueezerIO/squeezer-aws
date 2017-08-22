@@ -13,9 +13,9 @@ class AWSInvokeCMD {
 
   run() {
     return new Promise(() => {
-      const options  = this.sqz.cli.params.get().options;
+      const options      = this.sqz.cli.params.get().options;
       const functionName = options.function;
-      let eventInput = {};
+      let eventInput     = {};
 
       if (options.path) {
         eventInput = JSON.parse(fs.readFileSync(options.path, 'utf8'));
@@ -23,10 +23,8 @@ class AWSInvokeCMD {
         eventInput = JSON.parse(JSON.stringify(options.json));
       }
 
-      if (this.sqz.vars.project.cloud.name === 'aws') {
-        const awsInvoke = new AWSInvoke(this.sqz);
-        awsInvoke.run(functionName, eventInput);
-      }
+      const awsInvoke = new AWSInvoke(this.sqz);
+      awsInvoke.run(functionName, eventInput);
     });
   }
 }
